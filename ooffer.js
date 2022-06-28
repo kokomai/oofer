@@ -51,6 +51,7 @@ const OOFFER = {
                     + "</div>"
         popupDiv.innerHTML = innerHtml;
         overlay.append(popupDiv);
+        // https://codepen.io/imprakash/pen/GgNMXO
     }
 
 
