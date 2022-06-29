@@ -155,7 +155,7 @@ const OOFFER = {
                     + "'>"
                     + __oofferOptions.title
                     + "</h2>"
-                    + "<a class='close' href='#' onclick='OOFFER.close();' style='"
+                    + "<a class='close' href='javascript:void(0);' onclick='OOFFER.close();' style='"
                     + __oofferOptions.closeCss
                     +"'>&times;</a>"
                     + "<div class='content' style='"
@@ -187,6 +187,5 @@ const OOFFER = {
     }
 }
 
-window.addEventListener("load", function() {
-    OOFFER.set();
-});
+
+OOFFER.set();
