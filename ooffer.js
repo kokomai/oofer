@@ -19,9 +19,9 @@ const __oofferAdsList = [
  *      maxScore : max of user's action score.. if user read your post(by scrolling, or spend their time)
  *              the sore is improve, when score is filled as this option then show this ooffer popup
  *              / default : 100
- *      scrollScore : when user scroll on your post, score will increasing as this value
+ *      scrollScore : when user scroll on your post, score beeing increased as this value
  *                    / default : 3
- *      stayScore : when user stay on your post, score will increasing as this value
+ *      stayScore : when user stay on your post, score beeing increased as this value
  *                  / default : 5
  *  }
  */
