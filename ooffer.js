@@ -4,11 +4,8 @@
         scroll on your post or stay at your post.
 */
 
-/**
- * @Mustchange
- *  */ 
-// css location
-const __oofferCssLocation = '/ooffer.css'
+/* =================== START @Mustchange ===================== */
+
 // ads list img : image location / link : link to move
 const __oofferAdsList = [
     {img: '/test1.gif', link: 'https://github.com/kokomai', contents: "coding-orca want you!"},
@@ -18,7 +15,7 @@ const __oofferAdsList = [
 /**
  * options
  *  {
- *      type : small(small size), medium(medium size), large(large size) / default : medium
+ *      type : s(small size), m(medium size), l(large size) / default : medium
  *      maxScore : max of user's action score.. if user read your post(by scrolling, or spend their time)
  *              the sore is improve, when score is filled as this option then show this ooffer popup
  *              / default : 100
@@ -28,22 +25,60 @@ const __oofferAdsList = [
  *                  / default : 5
  *  }
  */
-let __ooferOptions = {
+let __oofferOptions = {
     title: "AD",
-    type: "medium",
+    type: "s",
     maxScore : 100,
     scrollScore : 3,
     stayScore : 5,
+    overlayCss : ` 
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        transition: opacity 500ms;
+        visibility: visible;
+        opacity: 999;
+    `,
+    popupDivCss : `
+        margin: 70px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 5px;
+        width: 40%;
+        position: relative;
+        transition: all 5s ease-in-out;
+        height:60%;
+    `,
+    titleCss : `
+        margin-top: 0;
+        color: #333;
+        font-family: Tahoma, Arial, sans-serif;
+    `,
+    closeCss : `
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        transition: all 200ms;
+        font-size: 30px;
+        font-weight: bold;
+        text-decoration: none;
+        color: #333;
+        hover:
+    `,
+    contentsCss : `
+        max-height: 70%;
+        
+    `,
+    imgCss : `
+        width:100%;
+    `
 }
-
-const __oofferCss  = document.createElement('link');
-__oofferCss.rel  = 'stylesheet';
-__oofferCss.type = 'text/css';
-__oofferCss.href = __oofferCssLocation;
-document.getElementsByTagName('head')[0].appendChild(__oofferCss);
+/* =================== END @Mustchange ===================== */
 
 const __oofferDiv = document.createElement('div');
-__oofferDiv.className = ['_ooffer'];
 __oofferDiv.id = '_ooffer';
 document.getElementsByTagName('body')[0].appendChild(__oofferDiv);
 
@@ -94,7 +129,8 @@ const OOFFER = {
         div.setAttribute("hidden", true);
         
         let overlay = document.createElement('div');
-        overlay.className = "overlay";
+        overlay.style.cssText = __oofferOptions.overlayCss
+
         overlay.addEventListener("click", function(event) {
             if(overlay !== event.target) return;
             OOFFER.close();
@@ -102,27 +138,43 @@ const OOFFER = {
         div.append(overlay);
 
         let popupDiv = document.createElement('div');
-        popupDiv.className = "popup"+ " " + __ooferOptions.type
+        popupDiv.style.cssText = __oofferOptions.popupDivCss
+
+        if(__oofferOptions.type === "l") {
+            popupDiv.style.width = "60%";
+            popupDiv.style.height = "80%";
+        } else if(__oofferOptions.type === "s") {
+            popupDiv.style.width = "30%";
+            popupDiv.style.height = "40%";
+        }
 
         let nans = OOFFER.random();
-        let innerHtml = "<h2>"
-                    + __ooferOptions.title
+        let innerHtml = "<h2 style='"
+                    + __oofferOptions.titleCss
+                    + "'>"
+                    + __oofferOptions.title
                     + "</h2>"
-                    + "<a class='close' href='#' onclick='OOFFER.close();'>&times;</a>"
-                    + "<div class='content'>"
+                    + "<a class='close' href='#' onclick='OOFFER.close();' style='"
+                    + __oofferOptions.closeCss
+                    +"'>&times;</a>"
+                    + "<div class='content' style='"
+                    + __oofferOptions.contentsCss
+                    + "'>"
                     + __oofferAdsList[nans].contents
                     + "<img src='"
                     + __oofferAdsList[nans].img
                     + "' onclick='location.href=\""
                     + __oofferAdsList[nans].link
-                    + "\"'>"
+                    + "\"' style='"
+                    + __oofferOptions.imgCss
+                    + "'>"
                     + "</div>"
         popupDiv.innerHTML = innerHtml;
         overlay.append(popupDiv);
-        OOFFER['maxScore'] = __ooferOptions.maxScore;
+        OOFFER['maxScore'] = __oofferOptions.maxScore;
         OOFFER['score'] = 0;
-        OOFFER['stayScore'] = __ooferOptions.stayScore;
-        OOFFER['scrollScore'] = __ooferOptions.scrollScore;
+        OOFFER['stayScore'] = __oofferOptions.stayScore;
+        OOFFER['scrollScore'] = __oofferOptions.scrollScore;
         OOFFER['ticking'] = setInterval(function() {
             OOFFER.score = OOFFER.score + OOFFER.stayScore;
             console.log(OOFFER.score);
@@ -132,8 +184,6 @@ const OOFFER = {
         
         // https://codepen.io/imprakash/pen/GgNMXO
     }
-
-
 }
 
 window.addEventListener("load", function() {
