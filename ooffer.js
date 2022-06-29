@@ -27,7 +27,7 @@ const __oofferAdsList = [
  */
 let __oofferOptions = {
     title: "AD",
-    type: "s",
+    type: "l",
     maxScore : 100,
     scrollScore : 3,
     stayScore : 5,
@@ -47,10 +47,10 @@ let __oofferOptions = {
         padding: 20px;
         background: #fff;
         border-radius: 5px;
-        width: 40%;
+        width: 50%;
+        height: 70%;
         position: relative;
         transition: all 5s ease-in-out;
-        height:60%;
     `,
     titleCss : `
         margin-top: 0;
@@ -66,14 +66,15 @@ let __oofferOptions = {
         font-weight: bold;
         text-decoration: none;
         color: #333;
-        hover:
     `,
     contentsCss : `
-        max-height: 70%;
-        
+        display:inline-block;
+        width:100%;
+        height:100%;
     `,
     imgCss : `
         width:100%;
+        height:90%
     `
 }
 /* =================== END @Mustchange ===================== */
@@ -145,7 +146,7 @@ const OOFFER = {
             popupDiv.style.height = "80%";
         } else if(__oofferOptions.type === "s") {
             popupDiv.style.width = "30%";
-            popupDiv.style.height = "40%";
+            popupDiv.style.height = "50%";
         }
 
         let nans = OOFFER.random();
