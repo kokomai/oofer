@@ -2,7 +2,7 @@
     - ooffer css
 */
 
-#_ooffer  .overlay {
+#_ooffer .overlay {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -10,10 +10,6 @@
     right: 0;
     background: rgba(0, 0, 0, 0.7);
     transition: opacity 500ms;
-    visibility: visible;
-    opacity: 1;
-}
-#_ooffer  .overlay:target {
     visibility: visible;
     opacity: 1;
 }
@@ -50,7 +46,9 @@
     max-height: 30%;
     overflow: auto;
 }
-
+#_ooffer  .popup img {
+    width:100%;
+}
 #_oofer  .large {
 
 }
